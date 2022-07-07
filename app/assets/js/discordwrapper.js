@@ -11,9 +11,9 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = '클라�
 
     activity = {
         details: initialDetails,
-        state: '피버온라인 : 플레이 중 ' + servSettings.shortId,
+        state: '피버온라인 : 새로운도약' + servSettings.shortId,
         largeImageKey: servSettings.largeImageKey,
-        largeImageText: 피버온라인 새로운도약
+        largeImageText: servSettings.largeImageText,
         smallImageKey: genSettings.smallImageKey,
         smallImageText: genSettings.smallImageText,
         startTimestamp: new Date().getTime(),

@@ -28,9 +28,10 @@ window.eval = global.eval = function () {
 
 // Display warning when devtools window is opened.
 remote.getCurrentWebContents().on('devtools-opened', () => {
-    console.log('%cThe console is dark and full of terrors.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
-    console.log('%cIf you\'ve been told to paste something here, you\'re being scammed.', 'font-size: 16px')
-    console.log('%cUnless you know exactly what you\'re doing, close this window.', 'font-size: 16px')
+    console.log('%c 지금 보시는 콘솔은 개발자 전용 콘솔입니다.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
+    console.log('%c 유저님 이 것을 개발자외 다른이에게 보여준다는 것은 위험할 것입니다.', 'font-size: 16px')
+    console.log('%c 사용방법을 모르신다면 이 콘솔창을 닫아주세요.', 'font-size: 16px')
+    console.log('%c 개발자 : 마플루', 'font-size: 16px')
 })
 
 // Disable zoom, needed for darwin.
@@ -44,13 +45,13 @@ if(!isDev){
         switch(arg){
             case 'checking-for-update':
                 loggerAutoUpdater.log('Checking for update..')
-                settingsUpdateButtonStatus('Checking for Updates..', true)
+                settingsUpdateButtonStatus('업데이트 확인 중...', true)
                 break
             case 'update-available':
                 loggerAutoUpdaterSuccess.log('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
-                    info.darwindownload = `https://github.com/dscalzi/HeliosLauncher/releases/download/v${info.version}/Helios-Launcher-setup-${info.version}${process.arch === 'arm64' ? '-arm64' : '-x64'}.dmg`
+                    info.darwindownload = `https://github.com/seokmin0134/PluLauncher/releases/download/v${info.version}/PluLaucher-setup-${info.version}${process.arch === 'arm64' ? '-arm64' : '-x64'}.dmg`
                     showUpdateUI(info)
                 }
                 
@@ -58,7 +59,7 @@ if(!isDev){
                 break
             case 'update-downloaded':
                 loggerAutoUpdaterSuccess.log('Update ' + info.version + ' ready to be installed.')
-                settingsUpdateButtonStatus('Install Now', false, () => {
+                settingsUpdateButtonStatus('설치하기', false, () => {
                     if(!isDev){
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
                     }
@@ -67,7 +68,7 @@ if(!isDev){
                 break
             case 'update-not-available':
                 loggerAutoUpdater.log('No new update found.')
-                settingsUpdateButtonStatus('Check for Updates')
+                settingsUpdateButtonStatus('업데이트 확안')
                 break
             case 'ready':
                 updateCheckListener = setInterval(() => {
